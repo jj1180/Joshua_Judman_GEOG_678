@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title>Josh Judman First Web Map</title>
+</head>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+  <style>
+    #mapid{ height: 500px; }
+  </style>
+</head>
+<body>
+
+  <div id="mapid"></div>
+
+  <script>
+
+  // initialize the map
+  var mymap = L.map('mapid').setView([30.627977, -96.3344068], 13);
+
+  // load a tile layer
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	maxZoom: 18,
+	id: 'mapbox.streets',
+	accessToken: 'pk.eyJ1IjoiamoxMTgwIiwiYSI6ImNrMnBpdnB4bDA0czczbW96cno1OTlyanMifQ.h7iiTl1N6F25lOs2Rl-iCQ'
+}).addTo(mymap);
+
+var circle = L.circle([30.6100, -96.3404], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 200
+}).addTo(mymap);
+
+var popup = L.popup()
+	.setLatLng([30.6100, -96.3404])
+	.setContent("Kyle Field 30.6199 -96.3404.")
+	.openOn(mymap);
+
+var popup = L.popup()
+	.setLatLng([30.6177, -96.3366])
+	.setContent("O&M.")
+	.addTo(mymap);
+
+var popup = L.popup()
+	.setLatLng([30.6158, -96.3408])
+	.setContent("Academic.")
+	.addTo(mymap);
+
+var LeafIcon = L.Icon.extend({
+		options: {
+			shadowUrl: 'leaf-shadow.png',
+			iconSize:     [38, 95],
+			shadowSize:   [50, 64],
+			iconAnchor:   [22, 94],
+			shadowAnchor: [4, 62],
+			popupAnchor:  [-3, -76]
+		}
+	});
+
+	var greenIcon = new LeafIcon({iconUrl: 'leaf-green.png'}),
+		redIcon = new LeafIcon({iconUrl: 'leaf-red.png'}),
+		orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
+
+	L.marker([30.6158, -96.3408], {icon: greenIcon}).bindPopup("I am Academic Building.").addTo(mapid);
+	L.marker([30.6177, -96.3366], {icon: redIcon}).bindPopup("I am O&M Building.").addTo(mapid);
+	L.marker([30.6199, -96.3404], {icon: orangeIcon}).bindPopup("I am Kyle Field.").addTo(mapid);
+
+  </script>
+</body>
+</html>
