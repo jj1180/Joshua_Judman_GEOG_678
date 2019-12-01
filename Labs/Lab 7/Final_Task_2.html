@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Final Task #2</title>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<style>
+        #container {
+            min-width: 310px;
+            max-width: 800px;
+            height: 400px;
+            margin: 0 auto
+        }
+</style>
+
+  </head>
+  <body>
+<div id="container"></div>
+
+<script>
+Highcharts.chart('container', {
+
+    title: { text: 'College Stataion Weekly Temperature Forecast' },
+    subtitle: { text: 'Source: Geog 678' },
+    yAxis: { title: { text: 'Temperature Range (Degrees F)' } },
+    xAxis: { title: { text: 'Temperature Range High to Low, Recorded During 24 Hours' } },
+    legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' },
+    plotOptions: { series: { label: { connectorAllowed: true }, pointStart: 0 } },
+
+    series: [{
+        name: 'Sat',
+        data: [82, 67]
+    }, {
+        name: 'Sun',
+        data: [81, 59]
+    }, {
+        name: 'Mon',
+        data: [81, 50]
+    }, {
+        name: 'Tue',
+        data: [70, 47]
+    }, {
+        name: 'Wed',
+        data: [77, 51]
+    }, {
+        name: 'Thu',
+        data: [78, 60]
+    }, {
+        name: 'Fri',
+        data: [79, 66]
+    }, {
+        name: 'Sat',
+        data: [80, 66]
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+</script>
+</body>
+</html>
