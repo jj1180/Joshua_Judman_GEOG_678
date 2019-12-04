@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lab 8 - Texas A&M Campus Boundary</title>
+<link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+<script src="https://js.arcgis.com/4.6/"></script>
+<style>
+    body {
+      font-family: sans-serif;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #viewDiv {
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+    }
+  </style>
+  </head>
+  <body>
+<div id="viewDiv"></div>
+
+<script>
+require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "dojo/domReady!"
+    ], function(
+      Map, MapView, FeatureLayer
+    ) {
+
+      var map = new Map({
+        basemap: "streets"
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-96.339469, 30.617492],
+        zoom: 13
+      });
+
+      /********************
+       * Add feature layer
+       ********************/
+      // TAMU Campus Boundary
+      var featureLayer = new FeatureLayer({
+        url: "https://services1.arcgis.com/qr14biwnHA6Vis6l/arcgis/rest/services/TAMU_Campus_Boundary/FeatureServer/0?token=FdS849pyN6r6Z19QRuWeftWaaglFdGrzh7AYWqpjFZbJj86hNLZFQDu5vbvBBgS-MqqsyTNVmGj7UcXU9Nu17xmQkLi_rTJsXnVy4oxJ2lcrH4m-m1Ar_o0VimfnBqwmUBcUpJaBHx0nK_Gt1H730hbPx4Yx-H5XgnBfcg9GzgFs1WN2zQqAzV34db8I2rawBWMpHsEMfuEnYkcpSGJxGwbZM2i9ebsKGVQ23TTm3R3SHpDzHz_dMJ2U4mIz42yw",
+        
+      });
+
+      map.add(featureLayer);
+      
+    });
+
+ var popupTemplate= {
+          title: "{Name}",
+          actions: [{
+            id: "find"
+          }],
+          content: [{
+            type: "fields",
+            fieldInfos: [{
+              fieldName: "Name"
+            }, {
+              fieldName: "ACRES_CALC"
+            }]
+          }]
+        }
+
+featureLayer.popupTemplate = popupTemplate;
+
+</script>
+</body>
+</html>
